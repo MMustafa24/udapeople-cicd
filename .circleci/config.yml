@@ -75,9 +75,9 @@ jobs:
 
   test-frontend:
     docker:
-       - image: cimg/node:13.8.0
+      - image: cimg/node:13.8.0
     steps:
-            - checkout
+      - checkout
       - restore_cache:
           keys: [frontend-deps]
       - run:
