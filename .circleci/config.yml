@@ -116,7 +116,7 @@ jobs:
             npm install
             npm audit --audit-level=critical
 
- scan-backend:
+  scan-backend:
     docker:
       - image: cimg/node:13.8.0
     steps:
