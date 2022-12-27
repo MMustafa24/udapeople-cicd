@@ -23,7 +23,29 @@ commands:
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
             sudo ./aws/install
-            # aws ec2 describe-instances --region us-east-1
+# aws ec2 describe-instances --region us-east-1
+
+ install_ansible:
+    description: Install Ansible v2
+    steps:
+      - run: 
+          name: Install Ansible v2
+          command: |
+            sudo apt update
+            sudo apt install software-properties-common -y
+            sudo add-apt-repository --yes --update ppa:ansible/ansible
+            sudo apt install ansible -y
+
+#    install_nodejs:
+#       description: install Node.js 13
+#       steps:
+#       - run:
+#           name: Install Node.js 13
+#           command: |
+#             curl -fsSL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+#             sudo apt install -y nodejs
+
+
 
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
