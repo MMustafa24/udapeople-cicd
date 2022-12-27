@@ -1,5 +1,5 @@
 version:
-  2.1
+   2.1
 
 commands:
   destroy-environment:
@@ -25,7 +25,7 @@ commands:
             sudo ./aws/install
 # aws ec2 describe-instances --region us-east-1
 
- install_ansible:
+  install_ansible:
     description: Install Ansible v2
     steps:
       - run: 
