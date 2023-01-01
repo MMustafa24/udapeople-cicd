@@ -226,18 +226,12 @@ jobs:
            at: ~/
 
       - run:
-          name: configure server
-          command: |
-            # Your code here
-            exit 1
-      - run:
           name: Configure server
           command: |
             cd .circleci/ansible
             cat inventory.txt
             ansible-playbook -i inventory.txt configure-server.yml
       - destroy-enviroment
-      # Here's where you will add some code to rollback on failure      
 
 #   run-migrations:
 #     docker:
