@@ -30,10 +30,10 @@ commands:
 
 
   install_ansible:
-    description: Install Ansible 
+    description: Install Ansible v2
     steps:
       - run: 
-          name: Install Ansible 
+          name: Install Ansible v2
           command: |
             sudo apt update
             sudo apt install software-properties-common -y
@@ -46,8 +46,10 @@ commands:
       - run:
           name: Install Node.js 13
           command: |
-            curl -fsSL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+            curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
             sudo apt install -y nodejs
+            sudo npm install --global n
+            sudo n 13.8.0
 
 
 
