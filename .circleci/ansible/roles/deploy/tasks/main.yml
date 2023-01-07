@@ -24,6 +24,14 @@
     production: yes
     state: present
 
+- name: "execute node app with pm2"
+  shell: |
+    cd ~/backend-app/dist
+    pm2 stop default
+    pm2 start main.js
+
+
+
 # - name: print message
 #   debug:
 #     msg: "{{ execute_node.stdout_lines }}"
