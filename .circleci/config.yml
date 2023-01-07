@@ -30,10 +30,10 @@ commands:
 
 
   install_ansible:
-    description: Install Ansible v2
+    description: Install Ansible 
     steps:
       - run: 
-          name: Install Ansible v2
+          name: Install Ansible 
           command: |
             sudo apt update
             sudo apt install software-properties-common -y
@@ -46,10 +46,8 @@ commands:
       - run:
           name: Install Node.js 13
           command: |
-            curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+            curl -fsSL https://deb.nodesource.com/setup_13.x | sudo -E bash -
             sudo apt install -y nodejs
-            sudo npm install --global n
-            sudo n 13.8.0
 
 
 
@@ -171,6 +169,10 @@ jobs:
             npm install
             npm audit fix --force --audit-level=critical
             npm audit fix --force --audit-level=critical
+            npm audit fix --force --audit-level=critical
+            npm audit fix --force --audit-level=critical
+            npm audit fix --force --audit-level=critical
+            npm audit fix --force --audit-level=critical
             npm audit --audit-level=critical
 
   deploy-infrastructure:
@@ -221,7 +223,6 @@ jobs:
       - install_ansible
       - add_ssh_keys:
           fingerprints: ["7e:55:69:9f:9b:50:b1:80:3d:6e:ab:c0:63:12:c5:d3"]
-
       - attach_workspace:
           at: ~/
       - run:
@@ -301,7 +302,6 @@ jobs:
       - install_nodejs
       - add_ssh_keys:
           fingerprints: ["7e:55:69:9f:9b:50:b1:80:3d:6e:ab:c0:63:12:c5:d3"]
-
       - attach_workspace:
           at: ~/
       - restore_cache:
@@ -311,27 +311,30 @@ jobs:
           command: |
             cd backend
             npm install
+            # apk add --update --no-cache tar gzip nodejs npm aws-cli ansible
       - run:
           name: Package Backend
           command: |
             cd backend
             npm run build
-            tar -czf artifact.tar.gz dist/* package*
+            tar -czvf artifact.tar.gz dist/* package*
+
+
             cd ..
-            pwd
             cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
-            ls .circleci/ansible/roles/deploy/files
       - run:
           name: Deploy backend
           command: |
             export TYPEORM_MIGRATIONS_DIR=./migrations
             export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
             export TYPEORM_MIGRATIONS=./migrations/*.ts
+
+            
             cd .circleci/ansible
             cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml
       # - destroy-environment
-      - revert-migrations
+      - revert-migrations   
 
   smoke-test: 
     docker:
@@ -348,9 +351,6 @@ jobs:
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text)
             export API_URL=http://${BACKEND_PUBLIC_IP}:3030
-            echo ${BACKEND_PUBLIC_IP}
-            echo backend-${CIRCLE_WORKFLOW_ID:0:7}
-            echo ${API_URL}
             if curl -s $API_URL/api/status | grep "ok"
             then
               exit 0
