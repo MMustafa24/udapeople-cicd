@@ -1,0 +1,5 @@
+[URL01]: https://github.com/MMustafa24/udapeople-cicd
+[URL02]: http://udapeople-fdc4473.s3-website-us-east-1.amazonaws.com
+[URL03]: https://d17l7qjq0q4s9t.cloudfront.net/#/employees
+[URL04]: ec2-35-175-158-189.compute-1.amazonaws.com
+[URL05]: https://ec2-18-208-137-144.compute-1.amazonaws.com
