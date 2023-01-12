@@ -1,0 +1,5 @@
+[URL01]: https://github.com/MMustafa24/udapeople-cicd
+[URL02]: http://udapeople-d7caa74.s3-website-us-east-1.amazonaws.com
+[URL03]: http://d17l7qjq0q4s9t.cloudfront.net/#/employees
+[URL04]: http://ec2-52-44-168-52.compute-1.amazonaws.com:3030/api/status
+[URL05]: http://ec2-3-88-62-116.compute-1.amazonaws.com:9090
